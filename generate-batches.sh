@@ -1,17 +1,40 @@
 #!/usr/bin/env bash -x
 
-APPRAISE_PYTHON=./Appraise/venv/bin/python3
-APPRAISE_ROOT=./Appraise
+APPRAISE_PYTHON=~/appraise/Appraise/venv/bin/python3
 
 mkdir -p batches
-prefix=batches/batches.slttest2022.sgg-deu
 
+
+# the final XML testset with the reference and primary submissions
 $APPRAISE_PYTHON scripts/combine.py \
-    -i submissions/slttest2022.dsgs-de.refs-nrm-docids.xml \
-    -o slttest2022.dsgs-de.all.xml \
-    submissions/slttest2022.dsgs-de.dsgs-de.*.xml
+    -i submissions/slttest2023.dsgs-de.src-ref.xml \
+    -o slttest2023.dsgs-de.all.xml \
+    submissions/slttest2023.dsgs-de.dsgs-de.*.xml
 
-$APPRAISE_PYTHON $APPRAISE_ROOT/create_wmt22_tasks.py \
-    -f slttest2022.dsgs-de.all.xml -o $prefix -s sgg -t deu --rng-seed 1111 \
-    --selected-docs submissions/slttest22-doc-snippets.tsv --static-context 5 --no-qc \
+
+prefix=batches/batches.slttest2023.sgg-deu.doclvl
+
+# only document-level documents
+$APPRAISE_PYTHON scripts/combine.py \
+    -i submissions/slttest2023.dsgs-de.src-ref.xml \
+    --rm-docs signsuisse -o slttest2023.dsgs-de.doclvl.xml \
+    submissions/slttest2023.dsgs-de.dsgs-de.*.xml
+
+$APPRAISE_PYTHON ./scripts/create_wmt22_tasks.py \
+    -f slttest2023.dsgs-de.doclvl.xml -o $prefix -s sgg -t deu --rng-seed 1111 \
+    --max-segs 10 --static-context 5 --no-qc \
+    | tee $prefix.log
+
+
+prefix=batches/batches.slttest2023.sgg-deu.seglvl
+
+# only segment-level documents
+$APPRAISE_PYTHON scripts/combine.py \
+    -i submissions/slttest2023.dsgs-de.src-ref.xml \
+    --rm-docs srf -o slttest2023.dsgs-de.seglvl.xml \
+    submissions/slttest2023.dsgs-de.dsgs-de.*.xml
+
+$APPRAISE_PYTHON ./scripts/create_wmt22_tasks.py \
+    -f slttest2023.dsgs-de.seglvl.xml -o $prefix -s sgg -t deu --rng-seed 1111 \
+    --max-segs 10 --static-context 1 --no-qc \
     | tee $prefix.log

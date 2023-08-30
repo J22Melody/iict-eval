@@ -21,6 +21,7 @@ def combine(
     xml_files,
     missing_message="NO TRANSLATION AVAILABLE",
     system_suffix="",
+    remove_docids=[],
 ):
     """
     Combine multiple XML files in WMT format
@@ -42,6 +43,11 @@ def combine(
                 src_doc.append(hypo)
                 hypo_count += 1
         sys.stderr.write(f"Added {hypo_count} hypotheses for document ID {src_docid}\n")
+
+    for docid in remove_docids:
+        for doc in src_tree.xpath("//doc[@id=\'" + docid + "\']"):
+            sys.stderr.write(f"Removing document with ID= {docid}\n")
+            doc.getparent().remove(doc)
 
     return ET.tostring(
         src_tree, pretty_print=True, xml_declaration=True, encoding='utf-8'
@@ -84,10 +90,17 @@ def main():
     parser.add_argument(
         "--suffix",
         default="",
+        help="System name suffix",
+    )
+    parser.add_argument(
+        "--rm-docs",
+        nargs="+",
+        default=[],
+        help="Remove document with provided IDs",
     )
     args = parser.parse_args()
 
-    output = combine(args.input_file, args.xml_files, args.missing_translation_message, args.suffix)
+    output = combine(args.input_file, args.xml_files, args.missing_translation_message, args.suffix, args.rm_docs)
     args.output_file.write(output)
 
 

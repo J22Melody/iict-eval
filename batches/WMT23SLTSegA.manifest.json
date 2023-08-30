@@ -1,0 +1,13 @@
+{
+    "CAMPAIGN_URL": "http://wmt23.appraise.cf/dashboard/sso/",
+    "CAMPAIGN_NAME": "WMT23SLTSegA",
+    "CAMPAIGN_KEY": "wmt23sltsega",
+    "CAMPAIGN_NO": 4,
+    "REDUNDANCY": 1,
+
+    "TASKS_TO_ANNOTATORS": [
+        ["sgg", "deu", "uniform", 13, 13]
+    ],
+    "TASK_TYPE": "Document",
+    "TASK_OPTIONS": "SQM;WMT22SignLT;sign2text-seglvl"
+}
