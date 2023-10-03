@@ -2,7 +2,7 @@
     "CAMPAIGN_URL": "http://wmt23.appraise.cf/dashboard/sso/",
     "CAMPAIGN_NAME": "WMT23SLTDocA",
     "CAMPAIGN_KEY": "wmt23sltdoca",
-    "CAMPAIGN_NO": 4,
+    "CAMPAIGN_NO": 8,
     "REDUNDANCY": 1,
 
     "TASKS_TO_ANNOTATORS": [

@@ -14,4 +14,4 @@ Data:
 * `submissions/*.xml` - the official submissions to the shared task
 * `batches/*.json` - JSON batches for creating a campaign in Appraise
 * `scores/*.csv` - scores exported from Appraise
-* `ranking.log` - output of Appraise script for computing system rankings
+* `ranking.txt` - system rankings
