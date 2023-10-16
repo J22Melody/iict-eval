@@ -1,0 +1,42 @@
+==> results/WMT23SLT.results.log <==
+pair                                      system                rank  ave   ave_z
+dsgs-de                                   translator-A          1     84.1  1.662
+dsgs-de                                   TTIC                  2-3   0.7   -0.398
+dsgs-de                                   baseline\_signsuisse  2-3   0.0   -0.408
+dsgs-de                                   knowcomp              4-5   0.0   -0.446
+dsgs-de                                   CASIA-SLT             4-5   0.0   -0.460
+==> results/WMT23SLT_A.results.log <==
+pair                                      system                rank  ave   ave_z
+dsgs-de                                   translator-A          1     82.9  1.677
+dsgs-de                                   TTIC                  2-3   1.1   -0.389
+dsgs-de                                   baseline\_signsuisse  2-3   0.0   -0.424
+dsgs-de                                   knowcomp              4-5   0.0   -0.457
+dsgs-de                                   CASIA-SLT             4-5   0.0   -0.457
+==> results/WMT23SLT_B.results.log <==
+pair                                      system                rank  ave   ave_z
+dsgs-de                                   translator-A          1     87.0  1.680
+dsgs-de                                   TTIC                  2-3   0.4   -0.409
+dsgs-de                                   baseline\_signsuisse  2-3   0.0   -0.412
+dsgs-de                                   knowcomp              4-5   0.0   -0.445
+dsgs-de                                   CASIA-SLT             4-5   0.0   -0.463
+==> results/WMT23SLT_C.results.log <==
+pair                                      system                rank  ave   ave_z
+dsgs-de                                   translator-A          1     82.4  1.628
+dsgs-de                                   baseline\_signsuisse  2-3   0.0   -0.387
+dsgs-de                                   TTIC                  2-3   0.5   -0.397
+dsgs-de                                   knowcomp              4-5   0.0   -0.436
+dsgs-de                                   CASIA-SLT             4-5   0.0   -0.458
+==> results/WMT23SLT_Doc.results.log <==
+pair                                      system                rank  ave   ave_z
+dsgs-de                                   translator-A          1     69.0  1.511
+dsgs-de                                   TTIC                  2-3   1.2   -0.357
+dsgs-de                                   baseline\_signsuisse  2-3   0.0   -0.374
+dsgs-de                                   CASIA-SLT             4-5   0.0   -0.420
+dsgs-de                                   knowcomp              4-5   0.0   -0.426
+==> results/WMT23SLT_Seg.results.log <==
+pair                                      system                rank  ave   ave_z
+dsgs-de                                   translator-A          1     99.0  1.810
+dsgs-de                                   TTIC                  2-5   0.2   -0.439
+dsgs-de                                   baseline\_signsuisse  2-4   0.0   -0.441
+dsgs-de                                   knowcomp              2-4   0.0   -0.465
+dsgs-de                                   CASIA-SLT             4-5   0.0   -0.498
