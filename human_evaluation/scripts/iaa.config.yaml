@@ -1,0 +1,24 @@
+# The files that contain the human annotations (Appraise format)
+csv_files:
+  - human_evaluation/scores/aggregated/all.csv
+
+# A csv file containing the header, i.e. the description of the columns
+csv_header_file: human_evaluation/scores/header/header.csv
+
+# Likert scale to discretize the full score scale for the Fleiss correation
+discretize_scale: 6
+
+# N as the range from 0 to N that the scores have been assigned
+score_scale: 100
+
+annotator_usernames:
+  annotatorA:
+    - sggdeu08
+    - sggdeu09
+  annotatorB:
+    - sggdeu0a
+    - sggdeu0b
+  annotatorC:
+    - sggdeu0c
+    - sggdeu0d
+
