@@ -1,0 +1,12 @@
+99.3 & TTIC:srf.0:0 & Guten Abend, meine Damen und Herren, willkommen zur "Tagesschau". & Guten Abend, meine Damen und Herren, willkommen zur "Tagesschau". \\
+83.3 & TTIC:srf.0:1 & Heute mit diesen Themen: & Das macht heute Montag Schlagzeilen: \\
+% 22.7 & ['TTIC:srf.0:10'] &  \\
+18.7  & ['TTIC:srf.23:9'] & Der US-Präsident ist heute zu Gast bei "10vor10". & Wesentliches gibt es auch heute bei "10vor10". \\
+16.3 & ['TTIC:srf.18:0'] & Und auch f\u00fcr EU-B\u00fcrger, die in die Schweiz einreisen wollen, soll es versch\u00e4rfte Einreiseregeln geben. &  Auch die EU will nun ihre Bürger vom Kreuzfahrtschiff zurückholen, denn man misstraut Japans Krisenmanagement. \\
+12.0 & ['TTIC:srf.14:2'] & Die Leute müssen sich Gedanken machen, wie sie die Zukunft meistern können. & Das muss sich ändern, sind sich die EU-Aussenminister einig. \\
+11.0 & ['TTIC:signsuisse.18:5'] & Der Film kann auf YouTube angeschaut werden. & Dieser Film ist spannend und interessant. \\
+8.333333333333334 ['TTIC:srf.15:4'] & Tausende Menschen sind seither ohne Hilfe von aussen ausgewandert. & Über 70'000 Menschen haben sich bis heute mit dem neuen Coronavirus infiziert. \\
+8.0 ['TTIC:srf.21:8']
+5.666666666666667 ['TTIC:srf.22:3']
+5.333333333333333 ['TTIC:signsuisse.13:3', 'TTIC:signsuisse.18:6', 'TTIC:signsuisse.7:4', 'TTIC:srf.17:0', 'TTIC:srf.18:3', 'TTIC:srf.15:3', 'TTIC:srf.15:9', 'TTIC:srf.1:1', 'TTIC:srf.19:9']
+5.0 ['CASIA:srf.1:1', 'CASIA:srf.20:7'] &  Die Temperaturen steigen in der Schweiz. & Und morgen gibt es sonnige Phasen bei Temperaturen um 9 °C. \\
