@@ -1,0 +1,13 @@
+{
+    "CAMPAIGN_URL": "https://pub.cl.uzh.ch/service/appraise-iict/",
+    "CAMPAIGN_NAME": "text2pose_Signsuisse_DSGS",
+    "CAMPAIGN_KEY": "text2pose_Signsuisse_DSGS",
+    "CAMPAIGN_NO": 3407,
+    "REDUNDANCY": 1,
+
+    "TASKS_TO_ANNOTATORS": [
+        ["sgg", "deu", "uniform", 1, 1]
+    ],
+    "TASK_TYPE": "Document",
+    "TASK_OPTIONS": "SQM;WMT22SignLT;UILanguageDeu;SLVideoInstructions"
+}
