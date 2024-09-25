@@ -106,7 +106,7 @@ with open(text_path) as file:
                         "sourceText": "skip this",
                         "targetContextLeft": "",
                         "targetID": system,
-                        "targetText": "skip this",
+                        "targetText": "https://files.ifi.uzh.ch/cl/archiv/2023/easier/iict/signsuisse_test/ref/6.mp4",
                     }
                     segments[system].append(segment)
 
