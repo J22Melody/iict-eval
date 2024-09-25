@@ -75,13 +75,14 @@ with open(text_path) as file:
 
                 video_path_remote = f'https://files.ifi.uzh.ch/cl/archiv/2023/easier/iict/signsuisse_test/{system}/{index}.mp4'
                 new_id = len([s for s in segments[system] if not s["isCompleteDocument"]])
+                document_id = int(new_id / document_size)
 
                 segment = {
                     "_block": -1,
-                    "_item": new_id,
-                    "documentID": f"signsuisse.{language}.{int(new_id / document_size)}",
+                    "_item": len(segments[system]),
+                    "documentID": f"signsuisse.{language}.{document_id}",
                     "isCompleteDocument": False,
-                    "itemID": new_id,
+                    "itemID": index,
                     "itemType": "REF" if system == 'ref' else "TGT",
                     "sourceContextLeft": "",
                     "sourceID": "signsuisse_test",
@@ -95,10 +96,10 @@ with open(text_path) as file:
                 if new_id % document_size == document_size - 1:
                     segment = {
                         "_block": -1,
-                        "_item": document_id_prefix + new_id,
-                        "documentID": f"signsuisse.{language}.{int(new_id / 10)}",
+                        "_item": len(segments[system]),
+                        "documentID": f"signsuisse.{language}.{document_id}",
                         "isCompleteDocument": True,
-                        "itemID": document_id_prefix + new_id,
+                        "itemID": document_id_prefix + document_id,
                         "itemType": "REF" if system == 'ref' else "TGT",
                         "sourceContextLeft": "",
                         "sourceID": "signsuisse_test",
