@@ -80,7 +80,7 @@ with open(text_path) as file:
                     "documentID": f"signsuisse.{language}.{int(new_id / 10)}",
                     "isCompleteDocument": True,
                     "itemID": new_id,
-                    "itemType": "TGT",
+                    "itemType": "REF" if system == 'ref' else "TGT",
                     "sourceContextLeft": "",
                     "sourceID": "signsuisse_test",
                     "sourceText": text,
@@ -91,19 +91,32 @@ with open(text_path) as file:
 
                 segments[system].append(segment)
 
-for system, items in segments.items():
-    output = [{
-        "items": items,
-        "task": {
-            "batchNo": 1,
-            "batchSize": len(items),
-            "randomSeed": 1111,
-            "requiredAnnotations": 1,
-            "sourceLanguage": "deu",
-            "targetLanguage": "sgg",
-        },
-    }]
 
-    output_path = f'./human_evaluation/batches/batches.text2pose.signsuisse.deu-sgg.{system}.json'
+for system, items in segments.items():
+    batch_size = 100
+    batches = []
+    current_batch_items = []
+
+    for item in items:
+        current_batch_items.append(item)
+
+        if len(current_batch_items) == batch_size:
+
+            batch = [{
+                "items": current_batch_items,
+                "task": {
+                    "batchNo": len(batches) + 1,
+                    "batchSize": batch_size,
+                    "randomSeed": 1111,
+                    "requiredAnnotations": 1,
+                    "sourceLanguage": "deu",
+                    "targetLanguage": "sgg",
+                },
+            }]
+
+            batches.append(batch)
+            current_batch_items = []
+
+    output_path = f'./human_evaluation/batches_text2pose/batches.text2pose.signsuisse.deu-sgg.{system}.json'
     with open(output_path, 'w') as fp:
-        json.dump(output, fp, indent=2)
+        json.dump(batches, fp, indent=2)
