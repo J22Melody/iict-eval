@@ -102,7 +102,7 @@ for system, items in segments.items():
 
         if len(current_batch_items) == batch_size:
 
-            batch = [{
+            batch = {
                 "items": current_batch_items,
                 "task": {
                     "batchNo": len(batches) + 1,
@@ -112,7 +112,7 @@ for system, items in segments.items():
                     "sourceLanguage": "deu",
                     "targetLanguage": "sgg",
                 },
-            }]
+            }
 
             batches.append(batch)
             current_batch_items = []
