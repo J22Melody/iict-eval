@@ -106,4 +106,4 @@ for system, items in segments.items():
 
     output_path = f'./human_evaluation/batches/batches.text2pose.signsuisse.deu-sgg.{system}.json'
     with open(output_path, 'w') as fp:
-        json.dump(output, fp)
+        json.dump(output, fp, indent=2)
