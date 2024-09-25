@@ -56,6 +56,8 @@ segments = {
     'sockeye': [],
 }
 
+document_size = 10
+document_id_prefix = 1000000
 with open(text_path) as file:
     for index, line in tqdm.tqdm(enumerate(file)):
         sent = line.rstrip()
@@ -77,8 +79,8 @@ with open(text_path) as file:
                 segment = {
                     "_block": -1,
                     "_item": new_id,
-                    "documentID": f"signsuisse.{language}.{int(new_id / 10)}",
-                    "isCompleteDocument": True,
+                    "documentID": f"signsuisse.{language}.{int(new_id / document_size)}",
+                    "isCompleteDocument": False,
                     "itemID": new_id,
                     "itemType": "REF" if system == 'ref' else "TGT",
                     "sourceContextLeft": "",
@@ -88,8 +90,24 @@ with open(text_path) as file:
                     "targetID": system,
                     "targetText": video_path_remote,
                 }
-
                 segments[system].append(segment)
+
+                if new_id % document_size == document_size - 1:
+                    segment = {
+                        "_block": -1,
+                        "_item": document_id_prefix + new_id,
+                        "documentID": f"signsuisse.{language}.{int(new_id / 10)}",
+                        "isCompleteDocument": True,
+                        "itemID": document_id_prefix + new_id,
+                        "itemType": "REF" if system == 'ref' else "TGT",
+                        "sourceContextLeft": "",
+                        "sourceID": "signsuisse_test",
+                        "sourceText": "skip this",
+                        "targetContextLeft": "",
+                        "targetID": system,
+                        "targetText": "skip this",
+                    }
+                    segments[system].append(segment)
 
 
 for system, items in segments.items():
@@ -100,7 +118,7 @@ for system, items in segments.items():
     for item in items:
         current_batch_items.append(item)
 
-        if len(current_batch_items) == batch_size:
+        if len(current_batch_items) == batch_size + 1:
 
             batch = {
                 "items": current_batch_items,
