@@ -74,7 +74,7 @@ with open(text_path) as file:
                     render_pose(pose, video_path)
 
                 video_path_remote = f'https://files.ifi.uzh.ch/cl/archiv/2023/easier/iict/signsuisse_test/{system}/{index}.mp4'
-                new_id = len(segments[system])
+                new_id = len([s for s in segments[system] if not s["isCompleteDocument"]])
 
                 segment = {
                     "_block": -1,
@@ -118,8 +118,7 @@ for system, items in segments.items():
     for item in items:
         current_batch_items.append(item)
 
-        if len(current_batch_items) == batch_size + 1:
-
+        if len(current_batch_items) == batch_size + batch_size / document_size:
             batch = {
                 "items": current_batch_items,
                 "task": {
