@@ -74,20 +74,42 @@ with open(text_path) as file:
                     render_pose(pose, video_path)
 
                 video_path_remote = f'https://pub.cl.uzh.ch/projects/iict/signsuisse_test/{system}/{index}.mp4'
-                new_id = len(segments[system])
+                new_id = len([s for s in segments[system] if not s["isCompleteDocument"]])
                 document_id = int(new_id / document_size)
 
                 segment = {
-                    "_block": document_id,
-                    "_item": new_id,
+                    "_block": -1,
+                    "_item": len(segments[system]),
+                    "documentID": f"signsuisse.{language}.{document_id}",
+                    "isCompleteDocument": False,
                     "itemID": index,
                     "itemType": "REF" if system == 'ref' else "TGT",
+                    "sourceContextLeft": "",
                     "sourceID": "signsuisse_test",
                     "sourceText": text,
+                    "targetContextLeft": "",
                     "targetID": system,
                     "targetText": video_path_remote,
                 }
                 segments[system].append(segment)
+
+                if new_id % document_size == document_size - 1:
+                    segment = {
+                        "_block": -1,
+                        "_item": len(segments[system]),
+                        "documentID": f"signsuisse.{language}.{document_id}",
+                        "isCompleteDocument": True,
+                        "itemID": document_id_prefix + document_id,
+                        "itemType": "REF" if system == 'ref' else "TGT",
+                        "sourceContextLeft": "",
+                        "sourceID": "signsuisse_test",
+                        "sourceText": "skip this",
+                        "targetContextLeft": "",
+                        "targetID": system,
+                        "targetText": video_path_remote,
+                    }
+                    segments[system].append(segment)
+
 
 for system, items in segments.items():
     batch_size = 100
@@ -97,7 +119,7 @@ for system, items in segments.items():
     for item in items:
         current_batch_items.append(item)
 
-        if len(current_batch_items) == batch_size:
+        if len(current_batch_items) == batch_size + batch_size / document_size:
             batch = {
                 "items": current_batch_items,
                 "task": {
