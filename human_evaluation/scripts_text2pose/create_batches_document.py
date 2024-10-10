@@ -1,6 +1,7 @@
 import os
 import json
 import tqdm
+import argparse
 
 import numpy as np
 
@@ -44,7 +45,24 @@ def render_pose(pose, output_path: str):
     visualizer.save_video(output_path, visualizer.draw())
 
 
-language = 'dsgs'
+language_map = {
+    'dsgs': {
+        'source': 'deu',
+        'target': 'sgg',
+    },
+    'lsf-ch': {
+        'source': 'fra',
+        'target': 'fsl',
+    },
+    'lis-ch': {
+        'source': 'ita',
+        'target': 'lse',
+    },
+}
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--language", type=str, default='dsgs')
+args = parser.parse_args()
 
 text_path = '/shares/iict-sp2.ebling.cl.uzh/zifjia/easier-continuous-translation/data_old/common/dsgs/signsuisse/test.txt'
 pose_dirs = {
@@ -62,7 +80,7 @@ with open(text_path) as file:
     for index, line in tqdm.tqdm(enumerate(file)):
         sent = line.rstrip()
 
-        if sent.startswith(f'<{language}>'):
+        if sent.startswith(f'<{args.language}>'):
             text = ' '.join(sent.split(' ')[1:])
 
             for system, pose_dir in pose_dirs.items():
@@ -80,7 +98,7 @@ with open(text_path) as file:
                 segment = {
                     "_block": -1,
                     "_item": len(segments[system]),
-                    "documentID": f"signsuisse.{language}.{document_id}",
+                    "documentID": f"signsuisse.{args.language}.{document_id}",
                     "isCompleteDocument": False,
                     "itemID": index,
                     "itemType": "REF" if system == 'ref' else "TGT",
@@ -97,7 +115,7 @@ with open(text_path) as file:
                     segment = {
                         "_block": -1,
                         "_item": len(segments[system]),
-                        "documentID": f"signsuisse.{language}.{document_id}",
+                        "documentID": f"signsuisse.{args.language}.{document_id}",
                         "isCompleteDocument": True,
                         "itemID": document_id_prefix + document_id,
                         "itemType": "REF" if system == 'ref' else "TGT",
@@ -127,14 +145,14 @@ for system, items in segments.items():
                     "batchSize": batch_size,
                     "randomSeed": 1111,
                     "requiredAnnotations": 1,
-                    "sourceLanguage": "deu",
-                    "targetLanguage": "sgg",
+                    "sourceLanguage": language_map[args.language]['source'],
+                    "targetLanguage": language_map[args.language]['target'],
                 },
             }
 
             batches.append(batch)
             current_batch_items = []
 
-    output_path = f'./human_evaluation/batches_text2pose/batches.text2pose.signsuisse.deu-sgg.{system}.json'
+    output_path = f'./human_evaluation/batches_text2pose/batches.text2pose.signsuisse.{language_map[args.language]['source']}-{language_map[args.language]['target']}.{system}.json'
     with open(output_path, 'w') as fp:
         json.dump(batches, fp, indent=2)
